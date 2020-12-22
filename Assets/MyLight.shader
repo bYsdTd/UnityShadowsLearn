@@ -2,6 +2,7 @@
 {
     Properties
     {
+
     }
     SubShader
     {
@@ -16,7 +17,7 @@
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityStandardBRDF.cginc"
-            #include "Light.cginc"
+            #include "Lighting.cginc"
             ENDCG
         }
 
@@ -30,7 +31,7 @@
             #pragma fragment frag
             #pragma multi_compile_fwdadd_fullshadows
             #include "UnityStandardBRDF.cginc"
-            #include "Light.cginc"
+            #include "Lighting.cginc"
             ENDCG
         }
 
