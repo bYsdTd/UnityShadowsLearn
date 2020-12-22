@@ -6,6 +6,7 @@
 struct appdata
 {
     float4 vertex : POSITION;
+    float3 normal : NORMAL;
 };
 
 struct v2f
@@ -16,7 +17,7 @@ struct v2f
 v2f vertShadowCaster (appdata v)
 {
     v2f o;
-    o.vertex = UnityObjectToClipPos(v.vertex);
+    o.vertex = UnityClipSpaceShadowCasterPos(v.vertex, v.normal);
     o.vertex = UnityApplyLinearShadowBias(o.vertex);
     return o;
 }
