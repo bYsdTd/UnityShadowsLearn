@@ -1,6 +1,7 @@
 #if !defined (LIGHTING_CGINC)
 #define LIGHTING_CGINC
 
+#include "UnityShadowLibrary.cginc"
 struct vertexData
 {
     float4 vertex : POSITION;
@@ -32,9 +33,17 @@ fixed4 frag(v2f i): SV_TARGET
 
     i.shadowCoordinates.xy = i.shadowCoordinates.xy / i.shadowCoordinates.w;
     i.shadowCoordinates.xy = (i.shadowCoordinates.xy+1) * 0.5;
+    i.shadowCoordinates.z /= i.shadowCoordinates.w;
+    // float2 offset = float2(0.5,0.5)/_ScreenParams.xy;
+    // float4 shadowVals;
+    // shadowVals.x = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x- offset.x, 1-i.shadowCoordinates.y- offset.y));
+    // shadowVals.y = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x - offset.x, 1-i.shadowCoordinates.y + offset.y));
+    // shadowVals.z = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x + offset.x, 1-i.shadowCoordinates.y - offset.y));
+    // shadowVals.w = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x + offset.x, 1-i.shadowCoordinates.y + offset.y));
+    // float shadow = dot(shadowVals, 0.25f);
+    float shadow = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x, 1-i.shadowCoordinates.y));
 
-    float attenuation = tex2D(_ShadowMapTexture, float2(i.shadowCoordinates.x, 1-i.shadowCoordinates.y));
-    return dot(normal, lightDir) * attenuation;
+    return dot(normal, lightDir) * shadow;
 }
 
 #endif
