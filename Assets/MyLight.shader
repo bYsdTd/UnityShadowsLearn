@@ -50,7 +50,7 @@
             CGPROGRAM
             #pragma vertex vertShadowCaster
             #pragma fragment fragShadowCaster
-            #pragma multi_complie_shadowcaster
+            // #pragma multi_complie_shadowcaster
 
             #include "Shadows.cginc"
             ENDCG

@@ -56,7 +56,7 @@ fixed4 frag(v2f i): SV_TARGET
 
     // buildin
     fixed shadow = SHADOW_ATTENUATION(i);
-    return dot(normal, lightDir) * shadow;
+    return dot(normal, lightDir) * shadow * _LightColor0;
 }
 
 #endif
